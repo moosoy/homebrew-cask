@@ -33,7 +33,7 @@ jobs:
   test:
     name: ${{ matrix.name }}
     needs: generate-matrix
-    runs-on: macos-11.0
+    runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
         include: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}

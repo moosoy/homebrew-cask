@@ -7,8 +7,12 @@ require_relative "ci_matrix"
 
 pr_url, = ARGV
 
-pr = GitHub.open_api(pr_url)
-labels = pr.fetch("labels").map { |l| l.fetch("name") }
+labels = if pr_url
+  pr = GitHub.open_api(pr_url)
+  pr.fetch("labels").map { |l| l.fetch("name") }
+else
+  []
+end
 
 tap = Tap.from_path(Dir.pwd)
 
